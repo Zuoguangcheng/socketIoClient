@@ -2,16 +2,18 @@ import routes from './route';
 import { Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import React from 'react';
 
 import { createIo } from '../reducers/app/appActions';
-import { getRoomDetailOn } from '../reducers/chat/chatActions';
+import { setChat } from '../reducers/chat/chatActions';
+import {
+  getCxt
+} from '../../src/containers/clientService';
 
 import PrivateRoute from './PrivateRouter';
 
 require('normalize.css/normalize.css');
 require('styles/App.css');
-
-import React from 'react';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,25 +24,28 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.actions.createIo();
+    let cxt = getCxt();
+    cxt.createIo().then(socket => {
+      this.props.actions.createIo(cxt);
+      socket.on('chatMsg', value => {
+        console.log('收到信息value', value);
+        this.props.actions.setChat(value);
+      });
+    });
   }
 
   render() {
     return (
-      <div>
-        <Switch>
-          {
-            routes.map((route, index) => (
-              <PrivateRoute
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                component={route.render}
-              />
-            ))
-          }
-        </Switch>
-      </div>
+      <Switch>
+        {routes.map((route, index) => (
+          <PrivateRoute
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            component={route.render}
+          />
+        ))}
+      </Switch>
     );
   }
 }
@@ -52,7 +57,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ createIo, getRoomDetailOn }, dispatch)
+    actions: bindActionCreators({ createIo, setChat }, dispatch)
   };
 }
 

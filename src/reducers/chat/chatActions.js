@@ -34,9 +34,20 @@ export function submit(id, chatRecord) {
       cxt
     } = getState().app;
 
-    cxt.sendMsg(id, chatRecord)
-    let chatRecords = getState().chat.chatRecords;
+    cxt.sendMsg(id, chatRecord);
+    let chatRecords = JSON.parse(JSON.stringify(getState().chat.chatRecords));
     chatRecords.push(chatRecord);
+    dispatch(createAction(SUBMIT_CHAT_RECORD)(chatRecords));
+  };
+}
+
+export function setChat(chatRecord) {
+  return (dispatch, getState) => {
+    let chatRecords = JSON.parse(JSON.stringify(getState().chat.chatRecords));
+    chatRecords.push(chatRecord);
+
+    console.log('actions 中的chatRecord', chatRecord);
+    console.log('actions 中的chatRecords', chatRecords);
     dispatch(createAction(SUBMIT_CHAT_RECORD)(chatRecords));
   };
 }

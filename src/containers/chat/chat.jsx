@@ -3,10 +3,15 @@ import { Input, Button } from 'antd';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import {
   getRoomDetail,
-  submit
+  submit,
+  setChat
 } from '../../reducers/chat/chatActions';
+import { createIo } from '../../reducers/app/appActions';
+
+
 
 require('./chat.less');
 
@@ -24,7 +29,7 @@ class Home extends React.Component {
     let { id } = this.props.match.params;
     setTimeout(() => {
       this.props.actions.getRoomDetail(id);
-    }, 0);
+    });
   }
 
   handleSubmit() {
@@ -93,7 +98,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ getRoomDetail, submit }, dispatch)
+    actions: bindActionCreators({ getRoomDetail, submit, setChat, createIo }, dispatch)
   };
 }
 

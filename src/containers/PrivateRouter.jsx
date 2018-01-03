@@ -4,9 +4,7 @@ import {
 } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => {
-    return <Component {...props} />
-  }} />
+  <Route {...rest} render={props => <Component {...props} />} />
 );
 
 export default PrivateRoute;

@@ -5,9 +5,8 @@ let url = 'http://localhost:3000';
 let cxt = null;
 
 export function getCxt() {
-  if (cxt == null) {
+  if (cxt === null) {
     cxt = new Context(url, io);
   }
-
   return cxt;
 }
