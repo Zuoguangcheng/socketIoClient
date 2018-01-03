@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { Input, Button } from 'antd';
 
 import { bindActionCreators } from 'redux';
@@ -9,9 +11,8 @@ import {
   submit,
   setChat
 } from '../../reducers/chat/chatActions';
+
 import { createIo } from '../../reducers/app/appActions';
-
-
 
 require('./chat.less');
 
@@ -30,6 +31,7 @@ class Home extends React.Component {
     setTimeout(() => {
       this.props.actions.getRoomDetail(id);
     });
+
   }
 
   handleSubmit() {
@@ -59,6 +61,12 @@ class Home extends React.Component {
           <ul>
             {detail && detail.persons.map((item, index) => <li key={index}>{item.name}</li>)}
           </ul>
+
+          <div className="bottom back">
+            <Link to={{ pathname: '/home' }}>
+              返回
+            </Link>
+          </div>
         </div>
 
         <div className="right">
@@ -74,7 +82,7 @@ class Home extends React.Component {
             <div className="input">
               <Input size="large" onChange={this.handleInputChange} value={chatRecord} />
             </div>
-            <div className="btn">
+            <div className="bottom">
               <Button
                 style={{ width: '100px' }}
                 size="large"
