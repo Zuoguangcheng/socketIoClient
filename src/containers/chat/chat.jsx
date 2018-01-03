@@ -52,29 +52,17 @@ class Home extends React.Component {
           <div>{`群当前人数${detail && detail.persons.length}`}</div>
 
           <ul>
-            {
-              detail && detail.persons.map((item, index) => {
-                return (
-                  <li key={index}>
-                    {item.name}
-                  </li>
-                );
-              })
-            }
+            {detail && detail.persons.map((item, index) => <li key={index}>{item.name}</li>)}
           </ul>
         </div>
 
         <div className="right">
           <div className="right-content">
-
             <div className="chat-records-content">
               <div className="chat-records-other">
-
               </div>
               <div className="chat-records-own">
-                {
-                  chatRecords.map((item, index) => <p key={index}><span>{item}</span></p>)
-                }
+                {chatRecords.map((item, index) => <p key={index}><span>{item}</span></p>)}
               </div>
             </div>
 

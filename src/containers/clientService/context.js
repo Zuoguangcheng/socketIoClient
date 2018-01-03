@@ -7,10 +7,10 @@ class Context {
   }
 
   createIo() {
-    this.socket = this.io.connect(this.url);
-    this.socket.on('chatMsg', value => {
-      console.log('收到信息value', value);
-    })
+    return new Promise((resolve, reject) => {
+      this.socket = this.io.connect(this.url);
+      resolve(this.socket);
+    });
   }
 
   getRooms() {
