@@ -6,6 +6,11 @@ import Chat from '../containers/chat/chat';
 
 const route = [
   {
+    path: '/',
+    exact: true,
+    render: props => <Home {...props} />
+  },
+  {
     path: '/home',
     exact: true,
     render: props => <Home {...props} />

@@ -5,12 +5,17 @@ import { Card } from 'antd';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { selectRooms } from '../../reducers/home/homeActions';
 
 require('./home.less');
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  handleRoomsSelect(id) {
+    this.props.actions.selectRooms(id);
   }
 
   render() {
@@ -23,7 +28,7 @@ class Home extends React.Component {
             !!rooms && rooms.map(item => {
               return (
                 <div key={item.id}>
-                  <Link to={`/chat/${item.id}`}>
+                  <Link to={`/chat/${item.id}`} onClick={() => this.handleRoomsSelect(item.id)}>
                     <Card style={{ width: 200 }}>
                       <p>{item.name}</p>
                       <p>{`${item.maxNum}人 群`}</p>
@@ -47,7 +52,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({}, dispatch)
+    actions: bindActionCreators({ selectRooms }, dispatch)
   };
 }
 

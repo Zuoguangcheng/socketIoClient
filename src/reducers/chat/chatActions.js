@@ -46,8 +46,16 @@ export function setChat(chatRecord) {
     let chatRecords = JSON.parse(JSON.stringify(getState().chat.chatRecords));
     chatRecords.push(chatRecord);
 
-    console.log('actions 中的chatRecord', chatRecord);
-    console.log('actions 中的chatRecords', chatRecords);
     dispatch(createAction(SUBMIT_CHAT_RECORD)(chatRecords));
+  };
+}
+
+export function leaveRooms(id) {
+  return (dispatch, getState) => {
+    let {
+      cxt
+    } = getState().app;
+
+    cxt.leaveRooms(id);
   };
 }

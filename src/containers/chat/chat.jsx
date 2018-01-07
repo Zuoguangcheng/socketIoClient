@@ -9,7 +9,8 @@ import { connect } from 'react-redux';
 import {
   getRoomDetail,
   submit,
-  setChat
+  setChat,
+  leaveRooms
 } from '../../reducers/chat/chatActions';
 
 import { createIo } from '../../reducers/app/appActions';
@@ -24,6 +25,7 @@ class Home extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
   }
 
   componentDidMount() {
@@ -31,7 +33,11 @@ class Home extends React.Component {
     setTimeout(() => {
       this.props.actions.getRoomDetail(id);
     });
+  }
 
+  handleBackClick() {
+    let { id } = this.props.match.params;
+    this.props.actions.leaveRooms(id);
   }
 
   handleSubmit() {
@@ -52,6 +58,7 @@ class Home extends React.Component {
     let { chatRecords } = this.props;
     let { chatRecord } = this.state;
 
+    console.log('detail', detail);
     return (
       <div className="chat">
         <div className="left">
@@ -63,7 +70,7 @@ class Home extends React.Component {
           </ul>
 
           <div className="bottom back">
-            <Link to={{ pathname: '/home' }}>
+            <Link to={{ pathname: '/home' }} onClick={this.handleBackClick}>
               返回
             </Link>
           </div>
@@ -106,7 +113,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ getRoomDetail, submit, setChat, createIo }, dispatch)
+    actions: bindActionCreators({ getRoomDetail, submit, setChat, createIo, leaveRooms }, dispatch)
   };
 }
 

@@ -35,6 +35,14 @@ class Context {
       this.socket.emit('chatMsg', id, record);
     });
   }
+
+  leaveRooms(id) {
+    this.socket.emit('leaveRooms', id);
+  }
+
+  selectRooms(id) {
+    this.socket.emit('selectRooms', id);
+  }
 }
 
 export default Context;
