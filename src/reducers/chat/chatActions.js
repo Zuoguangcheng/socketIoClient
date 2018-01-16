@@ -22,10 +22,14 @@ export function getRoomDetail(id) {
       cxt
     } = getState().app;
 
-    cxt.getRoomDetail(id).then(info => {
-      dispatch(getRoomDetailSuccess(info));
-    });
+    cxt.getRoomDetail(id)
   };
+}
+
+export function setRoomDetail(info) {
+  return dispatch => {
+    dispatch(getRoomDetailSuccess(info));
+  }
 }
 
 export function submit(id, chatRecord) {

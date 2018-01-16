@@ -13,25 +13,12 @@ class Context {
     });
   }
 
-  getRooms() {
-    return new Promise((resolve, reject) => {
-      this.socket.on('rooms', (info) => {
-        resolve(info);
-      });
-    });
-  }
-
   getRoomDetail(id) {
-    return new Promise((resolve, reject) => {
-      this.socket.emit('getChannel', id);
-      this.socket.on('roomsDetail', info => {
-        resolve(info);
-      });
-    });
+    this.socket.emit('getRoomDetail', id);
   }
 
   sendMsg(id, record) {
-    return new Promise((resolve) => {
+    return new Promise(() => {
       this.socket.emit('chatMsg', id, record);
     });
   }

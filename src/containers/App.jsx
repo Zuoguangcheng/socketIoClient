@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { createIo, setName } from '../reducers/app/appActions';
+import { createIo, setName, getRoomsList } from '../reducers/app/appActions';
+import { setRoomDetail } from '../reducers/chat/chatActions';
 import { setChat } from '../reducers/chat/chatActions';
 import {
   getCxt
@@ -27,9 +28,21 @@ class App extends React.Component {
     let cxt = getCxt();
     cxt.createIo().then(socket => {
       this.props.actions.createIo(cxt);
+
+      // 获取当前所有rooms的基本信息
+      socket.on('rooms', (info) => {
+        this.props.actions.getRoomsList(info);
+      });
+
+      // 实时获取当前room的聊天信息
       socket.on('chatMsg', value => {
-        console.log('收到信息value', value);
         this.props.actions.setChat(value);
+      });
+
+      socket.on('roomsDetail', info => {
+
+        console.log('info', info);
+        this.props.actions.setRoomDetail(info);
       });
     });
 
@@ -61,7 +74,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ createIo, setChat, setName }, dispatch)
+    actions: bindActionCreators({ createIo, setChat, setName, getRoomsList, setRoomDetail }, dispatch)
   };
 }
 
