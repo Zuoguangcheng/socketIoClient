@@ -1,9 +1,11 @@
-const { Record } = require('immutable');
+const {
+  Record
+} = require('immutable');
 
 let InitialState = Record({
   rooms: [],
-  cxt: {}
+  cxt: {},
+  name: ''
 });
 
 export default InitialState;
-

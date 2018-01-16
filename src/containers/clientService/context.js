@@ -36,12 +36,12 @@ class Context {
     });
   }
 
-  leaveRooms(id) {
-    this.socket.emit('leaveRooms', id);
+  leaveRooms(id, name) {
+    this.socket.emit('leaveRooms', id, name);
   }
 
-  selectRooms(id) {
-    this.socket.emit('selectRooms', id);
+  selectRooms(id, name) {
+    this.socket.emit('selectRooms', id, name);
   }
 }
 

@@ -56,6 +56,7 @@ export function leaveRooms(id) {
       cxt
     } = getState().app;
 
-    cxt.leaveRooms(id);
+    var name = sessionStorage.getItem("name");
+    cxt.leaveRooms(id, name);
   };
 }

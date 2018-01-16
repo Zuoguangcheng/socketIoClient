@@ -3,14 +3,18 @@ const {
 
   GET_ROOMS_REQUEST,
   GET_ROOMS_SUCCESS,
-  GET_ROOMS_FAILURE
+  GET_ROOMS_FAILURE,
+
+  SET_NAME,
 } = require('../constants').default;
 
 import {
   createAction
 } from 'redux-actions';
 
-import { getChat } from '../../reducers/chat/chatActions';
+import {
+  getChat
+} from '../../reducers/chat/chatActions';
 
 export const getRoomsRequest = createAction(GET_ROOMS_REQUEST);
 export const getRoomsSuccess = createAction(GET_ROOMS_SUCCESS);
@@ -32,4 +36,11 @@ export function createIo(cxt) {
     dispatch(createIoSuccess(cxt));
     dispatch(getRoomsList(cxt));
   };
+}
+
+export const setNameSuccess = createAction(SET_NAME);
+export function setName(name) {
+  return dispatch => {
+    dispatch(setNameSuccess(name))
+  }
 }

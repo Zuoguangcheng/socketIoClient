@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { createIo } from '../reducers/app/appActions';
+import { createIo, setName } from '../reducers/app/appActions';
 import { setChat } from '../reducers/chat/chatActions';
 import {
   getCxt
@@ -32,6 +32,10 @@ class App extends React.Component {
         this.props.actions.setChat(value);
       });
     });
+
+    if (!sessionStorage.getItem('name')) {
+      sessionStorage.setItem('name', String(new Date().getTime()));
+    }
   }
 
   render() {
@@ -57,7 +61,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ createIo, setChat }, dispatch)
+    actions: bindActionCreators({ createIo, setChat, setName }, dispatch)
   };
 }
 

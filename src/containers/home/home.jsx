@@ -28,7 +28,7 @@ class Home extends React.Component {
             !!rooms && rooms.map(item => {
               return (
                 <div key={item.id}>
-                  <Link to={`/chat/${item.id}`} onClick={() => this.handleRoomsSelect(item.id)}>
+                  <Link to={`/chat/${item._id}`} onClick={() => this.handleRoomsSelect(item._id)}>
                     <Card style={{ width: 200 }}>
                       <p>{item.name}</p>
                       <p>{`${item.maxNum}人 群`}</p>

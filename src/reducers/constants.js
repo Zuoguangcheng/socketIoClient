@@ -12,5 +12,7 @@ export default keyMirror({
   GET_ROOM_DETAIL_SUCCESS: null,
   GET_ROOM_DETAIL_FAILURE: null,
 
-  SUBMIT_CHAT_RECORD: null
+  SUBMIT_CHAT_RECORD: null,
+
+  SET_NAME: null,
 });

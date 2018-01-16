@@ -42,10 +42,11 @@ class Home extends React.Component {
 
   handleSubmit() {
     const detail = this.props.detail[0];
+
     let { chatRecord } = this.state;
     this.setState({ chatRecord: '' });
 
-    this.props.actions.submit(detail.id, chatRecord);
+    this.props.actions.submit(detail._id, chatRecord);
   }
 
   handleInputChange(e) {
@@ -58,7 +59,6 @@ class Home extends React.Component {
     let { chatRecords } = this.props;
     let { chatRecord } = this.state;
 
-    console.log('detail', detail);
     return (
       <div className="chat">
         <div className="left">

@@ -8,8 +8,9 @@ const {
 
   GET_ROOMS_REQUEST,
   GET_ROOMS_SUCCESS,
-  GET_ROOMS_FAILURE
+  GET_ROOMS_FAILURE,
 
+  SET_NAME,
 } = require('../constants').default;
 
 const initialState = new InitialState;
@@ -26,6 +27,9 @@ export default function activityReducer(state = initialState, action) {
       let rooms = action.payload;
       return state.set('rooms', rooms);
     case GET_ROOMS_FAILURE:
+      break;
+    case SET_NAME:
+      return state.set('name', action.payload);
   }
 
   return state;

@@ -8,9 +8,10 @@ import {
 export function selectRooms(id) {
   return (dispatch, getState) => {
     let {
-      cxt
+      cxt,
     } = getState().app;
 
-    cxt.selectRooms(id);
+    var name = sessionStorage.getItem("name");
+    cxt.selectRooms(id, name);
   };
 }
